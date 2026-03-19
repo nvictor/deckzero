@@ -3,6 +3,7 @@
 
   var EXCLUDED_TAGS = new Set(["ASIDE", "SCRIPT", "TEMPLATE"]);
   var HEADING_TAGS = new Set(["H1", "H2", "H3", "H4"]);
+  var BRAND_POSITIONS = new Set(["top-left", "top-right", "bottom-left", "bottom-right"]);
 
   function normalizeLayoutName(name) {
     if (!name) {
@@ -171,6 +172,34 @@
     };
   }
 
+  function parseBrandPosition(value) {
+    if (!value) {
+      return "top-right";
+    }
+
+    var normalized = String(value).trim().toLowerCase().replace(/[_\s]+/g, "-");
+
+    if (normalized === "tl" || normalized === "left-top") {
+      normalized = "top-left";
+    } else if (normalized === "tr" || normalized === "right-top") {
+      normalized = "top-right";
+    } else if (normalized === "bl" || normalized === "left-bottom") {
+      normalized = "bottom-left";
+    } else if (normalized === "br" || normalized === "right-bottom") {
+      normalized = "bottom-right";
+    }
+
+    if (!BRAND_POSITIONS.has(normalized)) {
+      return "top-right";
+    }
+
+    return normalized;
+  }
+
+  function parseBrandStyle(value) {
+    return String(value || "").trim().toLowerCase() === "tag" ? "tag" : "logo";
+  }
+
   function clearGenerated(section) {
     Array.from(section.querySelectorAll(".dz-split-shell[data-dz-generated='true']")).forEach(function (shell) {
       var header = shell.querySelector(".dz-split-header[data-dz-generated='true']");
@@ -194,14 +223,19 @@
   function ensureSplitStructure(section, layout) {
     var splitCandidate = getSplitCandidates(section);
     if (!splitCandidate) {
+      section.removeAttribute("data-dz-has-header");
       return;
     }
+
+    var hasHeader = splitCandidate.headerNodes.length > 0;
+    section.dataset.dzHasHeader = hasHeader ? "true" : "false";
 
     var shell = document.createElement("div");
     shell.className = "dz-split-shell";
     shell.setAttribute("data-dz-generated", "true");
+    shell.dataset.dzHasHeader = hasHeader ? "true" : "false";
 
-    if (splitCandidate.headerNodes.length > 0) {
+    if (hasHeader) {
       var header = document.createElement("div");
       header.className = "dz-split-header";
       header.setAttribute("data-dz-generated", "true");
@@ -227,6 +261,62 @@
 
     shell.appendChild(grid);
     section.appendChild(shell);
+  }
+
+  function ensureBranding(root) {
+    if (!root || !root.querySelector) {
+      return;
+    }
+
+    var revealRoot = null;
+    if (root.matches && root.matches(".reveal")) {
+      revealRoot = root;
+    } else if (root.closest) {
+      revealRoot = root.closest(".reveal");
+    }
+
+    if (!revealRoot && root.querySelector) {
+      revealRoot = root.querySelector(".reveal");
+    }
+
+    if (!revealRoot) {
+      return;
+    }
+
+    var src = revealRoot.dataset.dzBrandSrc;
+    var existing = revealRoot.querySelector(".dz-brandmark[data-dz-generated='true']");
+
+    if (!src) {
+      if (existing) {
+        existing.remove();
+      }
+      return;
+    }
+
+    var brandmark = existing || document.createElement("div");
+    var image = brandmark.querySelector("img") || document.createElement("img");
+    var position = parseBrandPosition(revealRoot.dataset.dzBrandPosition || revealRoot.dataset.dzBrandCorner);
+    var style = parseBrandStyle(revealRoot.dataset.dzBrandStyle);
+    var alt = revealRoot.dataset.dzBrandAlt || "";
+
+    brandmark.className = "dz-brandmark";
+    brandmark.dataset.dzGenerated = "true";
+    brandmark.dataset.dzBrandPosition = position;
+    brandmark.dataset.dzBrandStyle = style;
+    brandmark.setAttribute("aria-hidden", alt ? "false" : "true");
+
+    image.src = src;
+    image.alt = alt;
+    image.decoding = "async";
+    image.loading = "eager";
+
+    if (!image.parentNode) {
+      brandmark.appendChild(image);
+    }
+
+    if (!brandmark.parentNode) {
+      revealRoot.appendChild(brandmark);
+    }
   }
 
   function apply(sectionOrRoot) {
@@ -281,8 +371,12 @@
 
       if (layout && layout.primitive === "split") {
         ensureSplitStructure(section, layout);
+      } else {
+        section.removeAttribute("data-dz-has-header");
       }
     });
+
+    ensureBranding(root);
   }
 
   function autoApply() {
@@ -303,6 +397,8 @@
   var api = {
     apply: apply,
     inferLayout: inferLayout,
+    parseBrandPosition: parseBrandPosition,
+    parseBrandStyle: parseBrandStyle,
     parseLayoutHint: parseLayoutHint
   };
 

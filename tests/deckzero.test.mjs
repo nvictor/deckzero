@@ -28,4 +28,10 @@ assert.deepEqual(Deckzero.parseLayoutHint("split:broken"), {
   raw: "split:broken"
 });
 
+assert.equal(Deckzero.parseBrandPosition("bottom left"), "bottom-left");
+assert.equal(Deckzero.parseBrandPosition("tr"), "top-right");
+assert.equal(Deckzero.parseBrandPosition("unknown"), "top-right");
+assert.equal(Deckzero.parseBrandStyle("tag"), "tag");
+assert.equal(Deckzero.parseBrandStyle("anything-else"), "logo");
+
 console.log("deckzero runtime tests passed");

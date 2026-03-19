@@ -32,7 +32,13 @@
     </style>
   </head>
   <body>
-    <div class="reveal">
+    <div
+      class="reveal"
+      data-dz-brand-src="assets/media/default.svg"
+      data-dz-brand-style="logo"
+      data-dz-brand-position="top-right"
+      data-dz-brand-alt="deckzero"
+    >
       <div class="slides">
         <section>
           <!-- layout: title -->
@@ -76,6 +82,30 @@
               <li>Accent remains orthogonal and reusable.</li>
               <li>No structural theme overrides are required.</li>
             </ul>
+          </div>
+        </section>
+
+        <section>
+          <!-- layout: split:text-image -->
+          <div>
+            <p class="dz-eyebrow">Headerless horizontal</p>
+            <h3>Full-canvas split layout</h3>
+            <p>When a split slide starts directly with its two panes, the layout now uses the full slide height instead of reserving a header band.</p>
+          </div>
+          <div>
+            <img src="assets/media/default.svg" alt="Headerless horizontal split placeholder" />
+          </div>
+        </section>
+
+        <section>
+          <!-- layout: split:image-text:vertical -->
+          <div>
+            <img src="assets/media/default.svg" alt="Headerless vertical split placeholder" />
+          </div>
+          <div>
+            <p class="dz-eyebrow">Headerless vertical</p>
+            <h3>Same primitive, full height</h3>
+            <p>The vertical variant keeps the same authoring contract and stretches both panes to the available viewport.</p>
           </div>
         </section>
 

@@ -25,6 +25,9 @@
   --dz-panel: color-mix(in srgb, var(--dz-bg) 82%, white 18%);
   --dz-panel-muted: color-mix(in srgb, var(--dz-bg) 90%, white 10%);
   --dz-shadow: 0 24px 80px rgba(2, 8, 23, 0.28);
+  --dz-brand-inset: clamp(1.5rem, 2.8vw, 2.25rem);
+  --dz-brand-width: min(28vw, 15rem);
+  --dz-brand-height: min(18vh, 8.5rem);
 }
 
 .reveal {
@@ -231,6 +234,10 @@
   grid-template-rows: auto minmax(0, 1fr);
 }
 
+.reveal .slides section[data-dz-layout="split"][data-dz-has-header="false"] {
+  grid-template-rows: minmax(0, 1fr);
+}
+
 .reveal .dz-split-shell {
   display: grid;
   gap: var(--dz-space-md);
@@ -239,6 +246,10 @@
   max-width: none;
   min-height: 0;
   align-self: stretch;
+}
+
+.reveal .dz-split-shell[data-dz-has-header="false"] {
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .reveal .dz-split-header > * + * {
@@ -349,6 +360,69 @@
   transition:
     background-color 220ms ease,
     color 220ms ease;
+}
+
+.reveal .dz-brandmark {
+  position: absolute;
+  z-index: 12;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--dz-brand-width);
+  height: var(--dz-brand-height);
+  max-width: var(--dz-brand-width);
+  max-height: var(--dz-brand-height);
+  margin: var(--dz-brand-inset);
+  pointer-events: none;
+}
+
+.reveal .dz-brandmark[data-dz-brand-position="top-left"] {
+  top: 0;
+  left: 0;
+}
+
+.reveal .dz-brandmark[data-dz-brand-position="top-right"] {
+  top: 0;
+  right: 0;
+}
+
+.reveal .dz-brandmark[data-dz-brand-position="bottom-left"] {
+  bottom: 0;
+  left: 0;
+}
+
+.reveal .dz-brandmark[data-dz-brand-position="bottom-right"] {
+  right: 0;
+  bottom: 0;
+}
+
+.reveal .dz-brandmark[data-dz-brand-style="tag"] {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--dz-fg) 12%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--dz-bg) 80%, transparent);
+  box-shadow: var(--dz-shadow);
+  backdrop-filter: blur(16px);
+}
+
+.reveal .dz-brandmark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0.2rem;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+.reveal .dz-brandmark[data-dz-brand-style="tag"] img {
+  padding: 0;
 }
 
 @media (max-width: 900px) {
