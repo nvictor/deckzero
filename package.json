@@ -4,6 +4,7 @@
   "private": true,
   "description": "Opinionated design system primitives for Reveal.js decks.",
   "scripts": {
-    "test": "node ./tests/deckzero.test.mjs"
+    "compile": "node ./scripts/compile.mjs",
+    "test": "node ./tests/deckzero.test.mjs && node ./tests/compile.test.mjs"
   }
 }

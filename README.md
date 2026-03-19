@@ -8,6 +8,7 @@ It provides:
 - six slide primitives
 - token-only theme overrides
 - a tiny runtime that reads slide hints and applies auto-layout heuristics
+- an optional markdown-to-HTML compile workflow for demo and authoring convenience
 
 ## Package Shape
 
@@ -17,6 +18,8 @@ It provides:
 - `demo/`: self-contained browser-runnable demo deck
 
 ## Authoring Contract
+
+`deckzero` is HTML-first. The runtime reads normal Reveal-style HTML sections and applies layout hints plus heuristics to that HTML.
 
 Use HTML comments inside a slide section:
 
@@ -101,6 +104,26 @@ If there is no explicit layout hint, `deckzero` applies simple heuristics:
 - fragments => step
 - two top-level content blocks => split text-text
 
+## Optional Markdown Compile Workflow
+
+Markdown is supported as an authoring input, not as a runtime dependency. The supported workflow is:
+
+1. Author a deck in markdown.
+2. Preserve `deckzero` hints as HTML comments.
+3. Run `npm run compile`.
+4. Open the generated HTML deck as usual.
+
+The markdown compiler emits standard deckzero-compatible `<section>` markup. HTML remains the canonical runtime input.
+
+The markdown demo uses this flow:
+
+- source: `demo-md-src/deck.md`
+- output: `demo-md/index.html`
+
+`npm run compile` creates a separate self-contained `demo-md/` folder so the hand-authored `demo/` deck remains unchanged and easy to compare against.
+
+The compiler intentionally allows raw HTML blocks inside markdown for cases where structured slide markup is clearer than inventing a second hint language, especially split panes and custom controls.
+
 ## Theme Overrides
 
 Theme files must only override tokens. Structure and primitive layout live in `deckzero.css`.
@@ -153,7 +176,9 @@ The runtime auto-applies itself on `DOMContentLoaded`, and again on Reveal's `re
 
 ## Demo
 
-`deckzero/demo` is the only demo source of truth. It is intentionally self-contained so it can be opened directly in a browser or loaded as a folder deck in `GrandReveal`.
+`deckzero/demo` remains the hand-authored HTML demo.
+
+`deckzero/demo-md` is the generated markdown-backed comparison deck.
 
 Recommended layout:
 
@@ -165,6 +190,10 @@ Recommended layout:
 - `demo/assets/media/`
 
 The `demo` folder includes vendored Reveal runtime assets plus local media, so users do not need to download anything before opening it.
+
+To rebuild the markdown demo after editing markdown:
+
+- `npm run compile`
 
 To load the demo:
 
