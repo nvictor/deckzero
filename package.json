@@ -1,0 +1,9 @@
+{
+  "name": "deckzero",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Opinionated design system primitives for Reveal.js decks.",
+  "scripts": {
+    "test": "node ./tests/deckzero.test.mjs"
+  }
+}

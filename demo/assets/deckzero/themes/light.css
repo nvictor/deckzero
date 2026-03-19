@@ -1,0 +1,47 @@
+.reveal[data-dz-theme="light"],
+[data-dz-theme="light"] .reveal {
+  --dz-bg: #f8fafc;
+  --dz-fg: #0f172a;
+  --dz-accent: #2563eb;
+  --dz-muted: #64748b;
+  --dz-panel: rgba(255, 255, 255, 0.88);
+  --dz-panel-muted: rgba(241, 245, 249, 0.88);
+  --dz-shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
+}
+
+.reveal[data-dz-theme="light"],
+[data-dz-theme="light"] .reveal,
+.reveal[data-dz-theme="light"] .slides,
+[data-dz-theme="light"] .reveal .slides,
+.reveal[data-dz-theme="light"] .slides section,
+[data-dz-theme="light"] .reveal .slides section {
+  background: var(--dz-bg);
+}
+
+.reveal[data-dz-theme="light"] .dz-pane,
+[data-dz-theme="light"] .reveal .dz-pane {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: none;
+}
+
+.reveal[data-dz-theme="light"] .slides section[data-dz-pane-surface="none"] .dz-pane,
+[data-dz-theme="light"] .reveal .slides section[data-dz-pane-surface="none"] .dz-pane {
+  background: transparent;
+}
+
+.reveal[data-dz-theme="light"] pre,
+[data-dz-theme="light"] .reveal pre {
+  background: transparent;
+  color: #0f172a;
+}
+
+.reveal[data-dz-theme="light"] .slides section[data-dz-layout="code-focus"] pre code,
+[data-dz-theme="light"] .reveal .slides section[data-dz-layout="code-focus"] pre code {
+  background: #dbe3f1;
+  color: #0f172a;
+}
+
+.reveal[data-dz-theme="light"] .slides section[data-dz-accent] .dz-pane[data-dz-pane-mode="text"],
+[data-dz-theme="light"] .reveal .slides section[data-dz-accent] .dz-pane[data-dz-pane-mode="text"] {
+  background: color-mix(in srgb, var(--dz-accent) 10%, rgba(255, 255, 255, 0.98));
+}
