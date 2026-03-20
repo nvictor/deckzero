@@ -90,6 +90,7 @@
 
 .reveal h3 {
   font-size: clamp(1.4rem, 2.4vw, 2rem);
+  line-height: 1.05;
 }
 
 .reveal p,
@@ -99,6 +100,28 @@
 .reveal th {
   font-size: clamp(1.18rem, 1.55vw, 1.5rem);
   line-height: 1.45;
+}
+
+.reveal p {
+  margin: 0;
+}
+
+.reveal p + p {
+  margin-top: var(--dz-space-sm);
+}
+
+.reveal h1 + p,
+.reveal h2 + p,
+.reveal h3 + p,
+.reveal h4 + p {
+  margin-top: 0.45em;
+}
+
+.reveal p + h1,
+.reveal p + h2,
+.reveal p + h3,
+.reveal p + h4 {
+  margin-top: 1.2em;
 }
 
 .reveal small,
