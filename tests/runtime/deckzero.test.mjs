@@ -7,7 +7,7 @@ globalThis.document = undefined;
 globalThis.window = globalThis;
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
-const runtimePath = pathToFileURL(path.resolve(currentDir, "../dist/deckzero.js")).href;
+const runtimePath = pathToFileURL(path.resolve(currentDir, "../../dist/deckzero.js")).href;
 await import(runtimePath);
 
 const { Deckzero } = globalThis;

@@ -8,18 +8,30 @@ It provides:
 - six slide primitives
 - token-only theme overrides
 - a tiny runtime that reads slide hints and applies auto-layout heuristics
-- an optional markdown-to-HTML compile workflow for demo and authoring convenience
+- a markdown-first demo workflow that compiles to standard HTML
 
 ## Package Shape
 
 - `dist/deckzero.css`: base tokens, rhythm, and primitive styling
 - `dist/deckzero.js`: authoring hint parser and slide hydrator
 - `dist/themes/light.css`: light theme token override
-- `demo/`: self-contained browser-runnable demo deck
+- `src/compiler/`: markdown compiler and demo build helpers
+- `demo/src/`: canonical markdown demo source
+- `demo/vendor/`: vendored Reveal runtime assets used during demo builds
+- `demo/dist/`: generated browser-runnable demo deck
 
 ## Authoring Contract
 
-`deckzero` is HTML-first. The runtime reads normal Reveal-style HTML sections and applies layout hints plus heuristics to that HTML.
+`deckzero` remains HTML-based at runtime, but the recommended authoring flow is markdown-first.
+
+The compiler turns markdown into normal Reveal-style `<section>` markup, and the browser only consumes the generated HTML.
+
+Recommended workflow:
+
+1. Edit `demo/src/deck.md`.
+2. Preserve `deckzero` hints as HTML comments.
+3. Run `npm run build-demo`.
+4. Open `demo/dist/index.html`.
 
 Use HTML comments inside a slide section:
 
@@ -104,25 +116,18 @@ If there is no explicit layout hint, `deckzero` applies simple heuristics:
 - fragments => step
 - two top-level content blocks => split text-text
 
-## Optional Markdown Compile Workflow
-
-Markdown is supported as an authoring input, not as a runtime dependency. The supported workflow is:
-
-1. Author a deck in markdown.
-2. Preserve `deckzero` hints as HTML comments.
-3. Run `npm run compile`.
-4. Open the generated HTML deck as usual.
-
-The markdown compiler emits standard deckzero-compatible `<section>` markup. HTML remains the canonical runtime input.
-
-The markdown demo uses this flow:
-
-- source: `demo-md-src/deck.md`
-- output: `demo-md/index.html`
-
-`npm run compile` creates a separate self-contained `demo-md/` folder so the hand-authored `demo/` deck remains unchanged and easy to compare against.
+## Markdown Compiler
 
 The compiler intentionally allows raw HTML blocks inside markdown for cases where structured slide markup is clearer than inventing a second hint language, especially split panes and custom controls.
+
+Current demo layout:
+
+- source markdown: `demo/src/deck.md`
+- source media: `demo/src/assets/media/`
+- vendored Reveal assets: `demo/vendor/reveal/`
+- generated output: `demo/dist/`
+
+Compiler code lives in `src/compiler/`, while `scripts/` only provides thin command-line entry points.
 
 ## Theme Overrides
 
@@ -174,28 +179,22 @@ The browser bundle exposes `window.Deckzero` with:
 
 The runtime auto-applies itself on `DOMContentLoaded`, and again on Reveal's `ready` and `slidechanged` events when Reveal is present.
 
+## Scripts
+
+- `npm run build-demo`: compile `demo/src/deck.md` into `demo/dist/index.html` and sync runtime assets
+- `npm run compile`: alias for `npm run build-demo`
+- `npm run sync-demo-assets`: copy `dist/` into `demo/dist/assets/deckzero`
+- `npm test`: run runtime and compiler tests
+
 ## Demo
 
-`deckzero/demo` remains the hand-authored HTML demo.
+The demo output includes vendored Reveal runtime assets plus local media, so users do not need to download anything before opening it.
 
-`deckzero/demo-md` is the generated markdown-backed comparison deck.
+To rebuild the demo:
 
-Recommended layout:
-
-- `demo/index.html`
-- `demo/assets/deckzero/`
-- `demo/assets/deckzero/themes/`
-- `demo/assets/reveal/`
-- `demo/assets/reveal/plugin/`
-- `demo/assets/media/`
-
-The `demo` folder includes vendored Reveal runtime assets plus local media, so users do not need to download anything before opening it.
-
-To rebuild the markdown demo after editing markdown:
-
-- `npm run compile`
+- `npm run build-demo`
 
 To load the demo:
 
-- Browser: open `demo/index.html`
-- GrandReveal: click `Open Deck` and choose `deckzero/demo` or `deckzero/demo/index.html`
+- Browser: open `demo/dist/index.html`
+- GrandReveal: click `Open Deck` and choose `deckzero/demo/dist` or `deckzero/demo/dist/index.html`

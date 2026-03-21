@@ -1,17 +1,4 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-import { compileMarkdownDeck } from "./compile-markdown.mjs";
-
-const currentDir = path.dirname(fileURLToPath(import.meta.url));
-const projectRoot = path.resolve(currentDir, "..");
-const sourceDir = path.join(projectRoot, "demo-md-src");
-const outputDir = path.join(projectRoot, "demo-md");
-const markdownPath = path.join(sourceDir, "deck.md");
-const demoAssetsDir = path.join(projectRoot, "demo", "assets");
-const outputAssetsDir = path.join(outputDir, "assets");
-const outputIndexPath = path.join(outputDir, "index.html");
+import { formatHtml } from "./markdown.mjs";
 
 function indentBlock(value, indent) {
   return String(value)
@@ -23,8 +10,8 @@ function indentBlock(value, indent) {
     .join("\n");
 }
 
-function renderDocument(slidesHtml) {
-  return `<!DOCTYPE html>
+export function renderDocument(slidesHtml) {
+  return formatHtml(`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -73,7 +60,6 @@ ${indentBlock(slidesHtml, 8)}
     <script src="assets/reveal/plugin/zoom.js"></script>
     <script src="assets/reveal/plugin/notes.js"></script>
     <script src="assets/reveal/plugin/search.js"></script>
-    <script src="assets/reveal/plugin/markdown.js"></script>
     <script src="assets/reveal/plugin/highlight.js"></script>
     <script src="assets/deckzero/deckzero.js"></script>
     <script>
@@ -84,22 +70,10 @@ ${indentBlock(slidesHtml, 8)}
         center: true,
         transition: "fade",
         backgroundTransition: "fade",
-        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealHighlight]
       });
     </script>
   </body>
 </html>
-`;
+`);
 }
-
-await fs.rm(outputDir, { recursive: true, force: true });
-await fs.mkdir(outputDir, { recursive: true });
-
-const markdown = await fs.readFile(markdownPath, "utf8");
-const slidesHtml = compileMarkdownDeck(markdown);
-const documentHtml = renderDocument(slidesHtml);
-
-await fs.cp(demoAssetsDir, outputAssetsDir, { recursive: true });
-await fs.writeFile(outputIndexPath, documentHtml);
-
-console.log("Compiled demo-md/index.html from demo-md-src/deck.md");

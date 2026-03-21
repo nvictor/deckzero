@@ -5,7 +5,8 @@
   "description": "Opinionated design system primitives for Reveal.js decks.",
   "scripts": {
     "sync-demo-assets": "node ./scripts/sync-demo-assets.mjs",
-    "compile": "npm run sync-demo-assets && node ./scripts/compile.mjs",
-    "test": "node ./tests/deckzero.test.mjs && node ./tests/compile.test.mjs"
+    "build-demo": "node ./scripts/build-demo.mjs",
+    "compile": "npm run build-demo",
+    "test": "node ./tests/runtime/deckzero.test.mjs && node ./tests/compiler/markdown.test.mjs && node ./tests/compiler/build-demo.test.mjs"
   }
 }
