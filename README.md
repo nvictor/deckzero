@@ -116,6 +116,65 @@ If there is no explicit layout hint, `deckzero` applies simple heuristics:
 - fragments => step
 - two top-level content blocks => split text-text
 
+## Styling Primitives
+
+Alongside the slide layouts, `deckzero` also provides low-level styling primitives for repeated within-slide structures.
+
+### Card collection
+
+Use `.dz-card-grid` for repeated card collections:
+
+```html
+<div class="dz-card-grid" data-dz-columns="3">
+  <div class="dz-card">
+    <strong>One</strong>
+    <small>Shared shell styling.</small>
+  </div>
+</div>
+```
+
+Supported column hints:
+
+- `data-dz-columns="2"`
+- `data-dz-columns="3"`
+- `data-dz-columns="4"`
+- `data-dz-columns="5"`
+- omit the attribute for auto-fit card wrapping
+
+### Card shell
+
+Use `.dz-card` for bordered, compact panel content that repeats across a slide.
+
+The shell provides shared padding, radius, surface treatment, and heading rhythm so deck-local CSS does not need to recreate the same panel pattern.
+
+### Tone modifiers
+
+Use tone classes to map local meaning onto generic visual treatments:
+
+- `.dz-tone-neutral`
+- `.dz-tone-info`
+- `.dz-tone-success`
+- `.dz-tone-warning`
+- `.dz-tone-danger`
+
+These work on `.dz-card` and `.dz-sequence-node`.
+
+### Sequence primitive
+
+Use `.dz-sequence` and `.dz-sequence-node` for ordered journeys, reasoning chains, or staged workflows:
+
+```html
+<div class="dz-sequence" data-dz-columns="4">
+  <article class="dz-sequence-node dz-tone-warning">
+    <span class="dz-step-badge">3</span>
+    <strong>Decide</strong>
+    <small>Pick the next branch.</small>
+  </article>
+</div>
+```
+
+`sequence` is intentionally generic enough to cover step chips, numbered paths, and investigation flows without shipping domain-specific class names.
+
 ## Markdown Compiler
 
 The compiler intentionally allows raw HTML blocks inside markdown for cases where structured slide markup is clearer than inventing a second hint language, especially split panes and custom controls.

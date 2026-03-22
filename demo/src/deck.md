@@ -122,6 +122,77 @@ The runtime infers code-focus when a slide is dominated by a code block.
 
 ---
 
+## Card Collection
+
+Use a shared card shell when the slide repeats the same conceptual unit several times.
+
+<div class="dz-card-grid" data-dz-columns="3">
+  <div class="dz-card fragment" data-fragment-index="1">
+    <strong>Shared shell</strong>
+    <small>Border, spacing, and surface come from deckzero instead of deck-local CSS.</small>
+  </div>
+  <div class="dz-card fragment" data-fragment-index="2">
+    <strong>Responsive grid</strong>
+    <small>Two-column, three-column, and auto-fit collections can all use the same primitive.</small>
+  </div>
+  <div class="dz-card fragment" data-fragment-index="3">
+    <strong>Lower migration cost</strong>
+    <small>Downstream decks only keep token overrides and truly unique visual exceptions.</small>
+  </div>
+</div>
+
+---
+
+## Tone Modifiers
+
+Keep local meaning in the content while mapping visuals onto generic tones.
+
+<div class="dz-card-grid" data-dz-columns="3">
+  <div class="dz-card dz-tone-success fragment" data-fragment-index="1">
+    <strong>Success</strong>
+    <small>Useful for healthy states, ready paths, or low-risk conditions.</small>
+  </div>
+  <div class="dz-card dz-tone-warning fragment" data-fragment-index="2">
+    <strong>Warning</strong>
+    <small>Useful for investigate states, watch items, or medium-severity decisions.</small>
+  </div>
+  <div class="dz-card dz-tone-danger fragment" data-fragment-index="3">
+    <strong>Danger</strong>
+    <small>Useful for page-now states, critical paths, or high-risk conditions.</small>
+  </div>
+</div>
+
+---
+
+## Sequence Primitive
+
+Use sequence nodes for journeys, reasoning chains, and staged rollouts.
+
+<div class="dz-sequence" data-dz-columns="4">
+  <article class="dz-sequence-node fragment" data-fragment-index="1">
+    <span class="dz-step-badge">1</span>
+    <strong>Observe</strong>
+    <small>Start from the visible signal.</small>
+  </article>
+  <article class="dz-sequence-node fragment" data-fragment-index="2">
+    <span class="dz-step-badge">2</span>
+    <strong>Correlate</strong>
+    <small>Line up logs, metrics, and deploy context.</small>
+  </article>
+  <article class="dz-sequence-node fragment dz-tone-warning" data-fragment-index="3">
+    <span class="dz-step-badge">3</span>
+    <strong>Decide</strong>
+    <small>Pick the next investigation branch or remediation step.</small>
+  </article>
+  <article class="dz-sequence-node fragment dz-tone-success" data-fragment-index="4">
+    <span class="dz-step-badge">4</span>
+    <strong>Resolve</strong>
+    <small>Publish the outcome and fold the learning back into the system.</small>
+  </article>
+</div>
+
+---
+
 <!-- accent: info -->
 ## Theme Overrides
 

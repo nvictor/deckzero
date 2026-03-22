@@ -12,12 +12,16 @@ const paths = createProjectPaths(projectRoot);
 const deckMarkdown = await fs.readFile(paths.demoMarkdownPath, "utf8");
 const deckHtml = compileMarkdownDeck(deckMarkdown);
 
-assert.equal((deckHtml.match(/<section>/g) || []).length, 11);
+assert.equal((deckHtml.match(/<section>/g) || []).length, 14);
 assert.match(deckHtml, /<!-- layout: step -->/);
 assert.match(deckHtml, /<div class="theme-toggle">/);
 assert.match(deckHtml, /<p class="fragment">Start from the base system\.<\/p>/);
 assert.match(deckHtml, /<img src="assets\/media\/default\.svg" alt="Hero image placeholder" \/>/);
 assert.match(deckHtml, /<p class="dz-caption">Image with a short caption falls into the image-caption primitive\.<\/p>/);
+assert.match(deckHtml, /<div class="dz-card-grid" data-dz-columns="3">/);
+assert.match(deckHtml, /class="dz-card dz-tone-warning fragment"/);
+assert.match(deckHtml, /<div class="dz-sequence" data-dz-columns="4">/);
+assert.match(deckHtml, /<span class="dz-step-badge">3<\/span>/);
 
 await buildDemo(projectRoot);
 await syncDemoAssets(projectRoot);
@@ -31,5 +35,7 @@ assert.match(generatedIndex, /<section>\s*<!-- layout: title -->/);
 assert.match(generatedIndex, /^<!DOCTYPE html>\n<html lang="en">\n  <head>/);
 assert.match(generatedIndex, /<title>deckzero demo<\/title>/);
 assert.doesNotMatch(generatedIndex, /plugin\/markdown\.js/);
+assert.match(generatedIndex, /dz-card-grid/);
+assert.match(generatedIndex, /dz-sequence-node/);
 
 console.log("deckzero demo build tests passed");
