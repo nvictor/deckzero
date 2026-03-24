@@ -10,12 +10,32 @@ function indentBlock(value, indent) {
     .join("\n");
 }
 
-export function renderDocument(slidesHtml) {
+function renderThemeStylesheetLinks(themeNames) {
+  return themeNames
+    .map(function (themeName) {
+      return `<link rel="stylesheet" href="assets/deckzero/themes/${themeName}.css" />`;
+    })
+    .join("\n");
+}
+
+export function renderDocument(slidesHtml, options = {}) {
+  const {
+    title = "deckzero demo",
+    defaultTheme = "dark",
+    themeStylesheets = ["light"],
+    brandSrc = "assets/media/default.svg",
+    brandStyle = "logo",
+    brandPosition = "top-right",
+    brandAlt = "deckzero"
+  } = options;
+
+  const themeStylesheetLinks = renderThemeStylesheetLinks(themeStylesheets);
+
   return formatHtml(`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>deckzero demo</title>
+    <title>${title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="assets/reveal/reset.css" />
@@ -23,7 +43,7 @@ export function renderDocument(slidesHtml) {
     <link rel="stylesheet" href="assets/reveal/plugin/highlight/monokai.css" />
 
     <link rel="stylesheet" href="assets/deckzero/deckzero.css" />
-    <link rel="stylesheet" href="assets/deckzero/themes/light.css" />
+${indentBlock(themeStylesheetLinks, 4)}
 
     <style>
       .theme-toggle {
@@ -47,10 +67,11 @@ export function renderDocument(slidesHtml) {
   <body>
     <div
       class="reveal"
-      data-dz-brand-src="assets/media/default.svg"
-      data-dz-brand-style="logo"
-      data-dz-brand-position="top-right"
-      data-dz-brand-alt="deckzero"
+      data-dz-theme="${defaultTheme}"
+      data-dz-brand-src="${brandSrc}"
+      data-dz-brand-style="${brandStyle}"
+      data-dz-brand-position="${brandPosition}"
+      data-dz-brand-alt="${brandAlt}"
     >
       <div class="slides">
 ${indentBlock(slidesHtml, 8)}

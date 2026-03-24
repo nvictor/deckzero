@@ -3,6 +3,8 @@
   --dz-fg: #e2e8f0;
   --dz-accent: #38bdf8;
   --dz-muted: #64748b;
+  --dz-heading: var(--dz-fg);
+  --dz-emphasis: var(--dz-fg);
 
   --dz-font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
   --dz-font-mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
@@ -78,10 +80,14 @@
 .reveal h4 {
   margin: 0;
   padding-bottom: 0.16em;
-  color: var(--dz-fg);
+  color: var(--dz-heading);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 0.95;
+}
+
+.reveal :is(b, strong, em) {
+  color: var(--dz-emphasis);
 }
 
 .reveal h1 {

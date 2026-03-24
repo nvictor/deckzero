@@ -196,9 +196,10 @@ Use sequence nodes for journeys, reasoning chains, and staged rollouts.
 <!-- accent: info -->
 ## Theme Overrides
 
-Switch the deck between dark and light without changing any layout classes.
+Switch the deck between dark, light, and hulk without changing any layout classes.
 
 <div class="theme-toggle">
   <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'dark')">Dark</button>
   <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'light')">Light</button>
+  <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'hulk')">Hulk</button>
 </div>

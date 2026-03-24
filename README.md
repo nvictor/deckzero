@@ -15,6 +15,7 @@ It provides:
 - `dist/deckzero.css`: base tokens, rhythm, and primitive styling
 - `dist/deckzero.js`: authoring hint parser and slide hydrator
 - `dist/themes/light.css`: light theme token override
+- `dist/themes/hulk.css`: hulk theme token override
 - `src/compiler/`: markdown compiler and demo build helpers
 - `demo/src/`: canonical markdown demo source
 - `demo/vendor/`: vendored Reveal runtime assets used during demo builds
@@ -40,6 +41,7 @@ Exposed package entry points:
 - `deckzero/deckzero.css`
 - `deckzero/deckzero.js`
 - `deckzero/themes/light.css`
+- `deckzero/themes/hulk.css`
 
 ## Authoring Contract
 
@@ -211,7 +213,7 @@ Compiler code lives in `src/compiler/`, while `scripts/` only provides thin comm
 
 ## Theme Overrides
 
-Theme files must only override tokens. Structure and primitive layout live in `deckzero.css`.
+Theme files should primarily override tokens. Structure and primitive layout live in `deckzero.css`.
 
 Example:
 
@@ -222,32 +224,102 @@ Example:
 ```html
 <link rel="stylesheet" href="assets/deckzero/deckzero.css" />
 <link rel="stylesheet" href="assets/deckzero/themes/light.css" />
+<link rel="stylesheet" href="assets/deckzero/themes/hulk.css" />
 <script src="assets/deckzero/deckzero.js"></script>
 ```
 
+The base stylesheet exposes extra themeable typography tokens:
+
+```css
+:root {
+  --dz-heading: var(--dz-fg);
+  --dz-emphasis: var(--dz-fg);
+}
+```
+
+Themes can point those at `--dz-accent` when they want headings and inline emphasis to share the accent color.
+
+The bundled themes currently use those tokens like this:
+
+- `dark`: headings and emphasis inherit the dark foreground
+- `light`: headings and emphasis inherit the light foreground
+- `hulk`: headings and emphasis use the hulk accent `#16b61b`
+
 ## Creating A New Theme
 
-1. Copy `demo/` to a new `<theme>/` folder.
-2. Create [`<theme>/assets/deckzero/themes/<theme>.css`](<theme>/assets/deckzero/themes/<theme>.css) with your custom token overrides.
-3. Start from the light or dark theme and adjust branding-oriented tokens such as accent color, text color, background color, muted color, `--dz-font-sans`, and `--dz-font-mono`.
-4. Update [`<theme>/index.html`](<theme>/index.html):
+1. Create or update `assets/deckzero/themes/<theme>.css` with your custom token overrides.
+2. Adjust branding-oriented tokens such as accent color, heading color, emphasis color, text color, background color, muted color, `--dz-font-sans`, and `--dz-font-mono`.
+3. Update `index.html`:
    1. Link to `assets/deckzero/themes/<theme>.css`.
    2. Set the default `.reveal` container to `data-dz-theme="<theme>"`.
-   3. Add a theme toggle control that can switch between `dark`, `light`, and `<theme>`.
-5. AI can help generate the initial theme tokens and also help assemble demo slides that fit the theme’s visual direction.
+   3. Add a theme toggle control that can switch between the bundled themes and `<theme>`.
+4. AI can help generate the initial theme tokens and also help assemble demo slides that fit the theme’s visual direction.
 
 Example theme file:
 
 ```css
 [data-dz-theme="<theme>"] {
-  --dz-bg: #0b1020;
-  --dz-fg: #f3f4f6;
+  --dz-bg: #f8fafc;
+  --dz-fg: #0f172a;
   --dz-accent: #f97316;
   --dz-muted: #94a3b8;
+  --dz-heading: var(--dz-accent);
+  --dz-emphasis: var(--dz-accent);
   --dz-font-sans: "Avenir Next", "Segoe UI", sans-serif;
   --dz-font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 ```
+
+### Hulk-style custom theme recipe
+
+If you want a custom theme that behaves like `hulk`, use a light base, point headings and inline emphasis at your accent, swap in your fonts, and set a default brandmark position on the `.reveal` root.
+
+Example CSS:
+
+```css
+.reveal[data-dz-theme="gamma"],
+[data-dz-theme="gamma"] .reveal {
+  --dz-bg: #f8fafc;
+  --dz-fg: #0f172a;
+  --dz-accent: #7c3aed;
+  --dz-muted: #64748b;
+  --dz-heading: var(--dz-accent);
+  --dz-emphasis: var(--dz-accent);
+  --dz-font-sans: "Avenir Next", "Segoe UI", sans-serif;
+  --dz-font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --dz-panel: rgba(255, 255, 255, 0.9);
+  --dz-panel-muted: rgba(241, 245, 249, 0.9);
+  --dz-shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
+}
+```
+
+Example HTML defaults:
+
+```html
+<div
+  class="reveal"
+  data-dz-theme="gamma"
+  data-dz-brand-src="assets/media/logo.svg"
+  data-dz-brand-style="tag"
+  data-dz-brand-position="bottom-left"
+  data-dz-brand-alt="Gamma"
+>
+```
+
+That gives you:
+
+- a light-theme foundation
+- accent-colored headers plus `b`, `strong`, and `em`
+- custom sans and mono fonts
+- a default brandmark placement without changing runtime code
+
+Bundled themes now include:
+
+- `dark` (default base tokens in `deckzero.css`)
+- `light`
+- `hulk` with light-theme foundations and accent `#16b61b`
+
+The generated demo at `demo/dist/index.html` still defaults to `dark`; `light` and `hulk` are available via the theme toggle.
 
 ## Runtime
 
@@ -261,7 +333,7 @@ The runtime auto-applies itself on `DOMContentLoaded`, and again on Reveal's `re
 
 ## Scripts
 
-- `npm run build-demo`: compile `demo/src/deck.md` into `demo/dist/index.html` and sync runtime assets
+- `npm run build-demo`: compile `demo/src/deck.md` into `demo/dist/index.html`, then sync runtime assets
 - `npm run compile`: alias for `npm run build-demo`
 - `npm run sync-demo-assets`: copy `dist/` into `demo/dist/assets/deckzero`
 - `npm test`: run runtime and compiler tests

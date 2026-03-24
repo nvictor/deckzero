@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="assets/deckzero/deckzero.css" />
     <link rel="stylesheet" href="assets/deckzero/themes/light.css" />
+    <link rel="stylesheet" href="assets/deckzero/themes/hulk.css" />
 
     <style>
       .theme-toggle {
@@ -34,6 +35,7 @@
   <body>
     <div
     class="reveal"
+    data-dz-theme="dark"
     data-dz-brand-src="assets/media/default.svg"
     data-dz-brand-style="logo"
     data-dz-brand-position="top-right"
@@ -215,10 +217,11 @@
     <section>
       <!-- accent: info -->
       <h2>Theme Overrides</h2>
-      <p>Switch the deck between dark and light without changing any layout classes.</p>
+      <p>Switch the deck between dark, light, and hulk without changing any layout classes.</p>
       <div class="theme-toggle">
         <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'dark')">Dark</button>
         <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'light')">Light</button>
+        <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'hulk')">Hulk</button>
       </div>
     </section>
   </div>

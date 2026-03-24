@@ -5,7 +5,8 @@ export function createProjectPaths(projectRoot) {
   const demoSourceDir = path.join(demoDir, "src");
   const demoSourceAssetsDir = path.join(demoSourceDir, "assets");
   const demoVendorDir = path.join(demoDir, "vendor");
-  const demoOutputDir = path.join(demoDir, "dist");
+  const demoDistDir = path.join(demoDir, "dist");
+  const demoOutputDir = demoDistDir;
   const demoOutputAssetsDir = path.join(demoOutputDir, "assets");
 
   return {
@@ -17,6 +18,7 @@ export function createProjectPaths(projectRoot) {
     demoSourceMediaDir: path.join(demoSourceAssetsDir, "media"),
     demoVendorDir,
     demoVendorRevealDir: path.join(demoVendorDir, "reveal"),
+    demoDistDir,
     demoOutputDir,
     demoOutputAssetsDir,
     demoOutputDeckzeroDir: path.join(demoOutputAssetsDir, "deckzero"),

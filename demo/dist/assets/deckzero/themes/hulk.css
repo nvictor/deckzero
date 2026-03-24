@@ -1,0 +1,44 @@
+.reveal[data-dz-theme="hulk"],
+[data-dz-theme="hulk"] .reveal {
+  --dz-bg: #f4fbf4;
+  --dz-fg: #143016;
+  --dz-accent: #16b61b;
+  --dz-muted: #58715a;
+  --dz-heading: var(--dz-accent);
+  --dz-emphasis: var(--dz-accent);
+  --dz-panel: rgba(255, 255, 255, 0.92);
+  --dz-panel-muted: rgba(232, 244, 232, 0.92);
+  --dz-shadow: 0 24px 80px rgba(20, 48, 22, 0.12);
+}
+
+.reveal[data-dz-theme="hulk"],
+[data-dz-theme="hulk"] .reveal,
+.reveal[data-dz-theme="hulk"] .slides,
+[data-dz-theme="hulk"] .reveal .slides,
+.reveal[data-dz-theme="hulk"] .slides section,
+[data-dz-theme="hulk"] .reveal .slides section {
+  background: var(--dz-bg);
+}
+
+.reveal[data-dz-theme="hulk"] .dz-pane,
+[data-dz-theme="hulk"] .reveal .dz-pane {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: none;
+}
+
+.reveal[data-dz-theme="hulk"] .slides section[data-dz-pane-surface="none"] .dz-pane,
+[data-dz-theme="hulk"] .reveal .slides section[data-dz-pane-surface="none"] .dz-pane {
+  background: transparent;
+}
+
+.reveal[data-dz-theme="hulk"] pre,
+[data-dz-theme="hulk"] .reveal pre {
+  background: transparent;
+  color: #143016;
+}
+
+.reveal[data-dz-theme="hulk"] .slides section[data-dz-layout="code-focus"] pre code,
+[data-dz-theme="hulk"] .reveal .slides section[data-dz-layout="code-focus"] pre code {
+  background: #e3f2e4;
+  color: #143016;
+}

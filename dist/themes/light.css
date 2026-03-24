@@ -4,6 +4,8 @@
   --dz-fg: #0f172a;
   --dz-accent: #2563eb;
   --dz-muted: #64748b;
+  --dz-heading: var(--dz-fg);
+  --dz-emphasis: var(--dz-fg);
   --dz-panel: rgba(255, 255, 255, 0.88);
   --dz-panel-muted: rgba(241, 245, 249, 0.88);
   --dz-shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
