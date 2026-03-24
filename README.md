@@ -20,6 +20,27 @@ It provides:
 - `demo/vendor/`: vendored Reveal runtime assets used during demo builds
 - `demo/dist/`: generated browser-runnable demo deck
 
+## Package Consumption
+
+`deckzero` can be consumed as a package directly from its repository.
+
+Example:
+
+```json
+{
+  "dependencies": {
+    "deckzero": "github:nvictor/deckzero"
+  }
+}
+```
+
+Exposed package entry points:
+
+- `deckzero/compiler`
+- `deckzero/deckzero.css`
+- `deckzero/deckzero.js`
+- `deckzero/themes/light.css`
+
 ## Authoring Contract
 
 `deckzero` remains HTML-based at runtime, but the recommended authoring flow is markdown-first.

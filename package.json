@@ -1,8 +1,21 @@
 {
   "name": "deckzero",
   "version": "0.1.0",
-  "private": true,
+  "type": "module",
   "description": "Opinionated design system primitives for Reveal.js decks.",
+  "files": [
+    "dist",
+    "src/compiler",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./dist/deckzero.js",
+    "./compiler": "./src/compiler/index.mjs",
+    "./deckzero.css": "./dist/deckzero.css",
+    "./deckzero.js": "./dist/deckzero.js",
+    "./themes/light.css": "./dist/themes/light.css",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "sync-demo-assets": "node ./scripts/sync-demo-assets.mjs",
     "build-demo": "node ./scripts/build-demo.mjs",
