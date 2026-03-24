@@ -5,8 +5,8 @@
 It provides:
 
 - a minimal token layer
-- six slide primitives
-- token-only theme overrides
+- a small set of slide layout primitives
+- bundled themes plus themeable typography and surface tokens
 - a tiny runtime that reads slide hints and applies auto-layout heuristics
 - a markdown-first demo workflow that compiles to standard HTML
 
@@ -37,6 +37,7 @@ Example:
 
 Exposed package entry points:
 
+- `deckzero`
 - `deckzero/compiler`
 - `deckzero/deckzero.css`
 - `deckzero/deckzero.js`
@@ -75,6 +76,8 @@ Supported layout hints:
 - `code-focus`
 - `image-caption`
 - `step`
+
+These map onto the core layout primitives: `title`, `statement`, `split`, `code-focus`, `image-caption`, and `step`.
 
 Supported pane surface hints:
 
@@ -213,13 +216,15 @@ Compiler code lives in `src/compiler/`, while `scripts/` only provides thin comm
 
 ## Theme Overrides
 
-Theme files should primarily override tokens. Structure and primitive layout live in `deckzero.css`.
+Theme files should primarily override tokens, while `deckzero.css` keeps the shared layout system. Bundled themes may also include small, theme-scoped surface overrides for panes and code blocks.
 
-Example:
+Theme selection example:
 
 ```html
 <div class="reveal" data-dz-theme="light">
 ```
+
+If you want to switch between bundled themes at runtime, load the optional theme stylesheets you plan to toggle to. The dark theme is already covered by the base tokens in `deckzero.css`.
 
 ```html
 <link rel="stylesheet" href="assets/deckzero/deckzero.css" />
@@ -249,16 +254,18 @@ The bundled themes currently use those tokens like this:
 
 1. Create or update `assets/deckzero/themes/<theme>.css` with your custom token overrides.
 2. Adjust branding-oriented tokens such as accent color, heading color, emphasis color, text color, background color, muted color, `--dz-font-sans`, and `--dz-font-mono`.
-3. Update `index.html`:
+3. Add scoped surface overrides only when the default pane or code treatments do not fit the theme.
+4. Update `index.html`:
    1. Link to `assets/deckzero/themes/<theme>.css`.
    2. Set the default `.reveal` container to `data-dz-theme="<theme>"`.
    3. Add a theme toggle control that can switch between the bundled themes and `<theme>`.
-4. AI can help generate the initial theme tokens and also help assemble demo slides that fit the theme’s visual direction.
+5. Start from `light` if you want a bright theme, or from the base dark tokens in `deckzero.css` if you want a darker direction.
 
 Example theme file:
 
 ```css
-[data-dz-theme="<theme>"] {
+.reveal[data-dz-theme="<theme>"],
+[data-dz-theme="<theme>"] .reveal {
   --dz-bg: #f8fafc;
   --dz-fg: #0f172a;
   --dz-accent: #f97316;
@@ -272,7 +279,7 @@ Example theme file:
 
 ### Hulk-style custom theme recipe
 
-If you want a custom theme that behaves like `hulk`, use a light base, point headings and inline emphasis at your accent, swap in your fonts, and set a default brandmark position on the `.reveal` root.
+If you want a custom theme that behaves like `hulk`, start from the light-theme palette, point headings and inline emphasis at your accent, swap in your fonts, and set a default brandmark position on the `.reveal` root.
 
 Example CSS:
 
@@ -306,7 +313,7 @@ Example HTML defaults:
 >
 ```
 
-That gives you:
+That setup gives you:
 
 - a light-theme foundation
 - accent-colored headers plus `b`, `strong`, and `em`
@@ -326,6 +333,8 @@ The generated demo at `demo/dist/index.html` still defaults to `dark`; `light` a
 The browser bundle exposes `window.Deckzero` with:
 
 - `apply(root)`
+- `parseBrandPosition(value)`
+- `parseBrandStyle(value)`
 - `parseLayoutHint(value)`
 - `inferLayout(section)`
 
