@@ -116,20 +116,20 @@ Brandmark sizing and inset are controlled by tokens in `deckzero.css`:
 For split layouts, use two major content blocks. A common pattern is:
 
 ```html
-<section>
-  <!-- layout: split:text-image -->
-  <h2>How It Works</h2>
-  <div>
-    <p>Explain the idea.</p>
-    <ul>
-      <li>One</li>
-      <li>Two</li>
-    </ul>
-  </div>
-  <div>
-    <img src="assets/media/default.svg" alt="Preview" />
-  </div>
-</section>
+<!-- layout: split:text-image -->
+## How It Works
+
+<div>
+  <p>Explain the idea.</p>
+  <ul>
+    <li>One</li>
+    <li>Two</li>
+  </ul>
+</div>
+
+<div>
+  <img src="assets/media/default.svg" alt="Preview" />
+</div>
 ```
 
 If a split slide omits heading or intro blocks and starts directly with the two panes, `deckzero` treats it as a full-canvas split and lets the panes occupy the full slide height.
