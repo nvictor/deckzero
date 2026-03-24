@@ -27,6 +27,8 @@ await buildDemo(projectRoot);
 await syncDemoAssets(projectRoot);
 
 const generatedIndex = await fs.readFile(paths.demoOutputIndexPath, "utf8");
+const baseCss = await fs.readFile(path.join(paths.distDir, "deckzero.css"), "utf8");
+const lightThemeCss = await fs.readFile(path.join(paths.distDir, "themes", "light.css"), "utf8");
 await fs.stat(path.join(paths.demoOutputRevealDir, "reveal.js"));
 await fs.stat(path.join(paths.demoOutputDeckzeroDir, "deckzero.js"));
 await fs.stat(path.join(paths.demoOutputMediaDir, "default.svg"));
@@ -37,5 +39,8 @@ assert.match(generatedIndex, /<title>deckzero demo<\/title>/);
 assert.doesNotMatch(generatedIndex, /plugin\/markdown\.js/);
 assert.match(generatedIndex, /dz-card-grid/);
 assert.match(generatedIndex, /dz-sequence-node/);
+assert.doesNotMatch(baseCss, /section\[data-dz-accent\]\s+h1/);
+assert.doesNotMatch(baseCss, /section\[data-dz-accent\]\s+\.dz-pane\[data-dz-pane-mode="text"\]/);
+assert.doesNotMatch(lightThemeCss, /section\[data-dz-accent\]\s+\.dz-pane\[data-dz-pane-mode="text"\]/);
 
 console.log("deckzero demo build tests passed");

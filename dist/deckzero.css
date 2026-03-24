@@ -480,16 +480,6 @@
   --dz-accent: #60a5fa;
 }
 
-.reveal .slides section[data-dz-accent] h1,
-.reveal .slides section[data-dz-accent] h2,
-.reveal .slides section[data-dz-accent] h3 {
-  color: color-mix(in srgb, var(--dz-fg) 78%, var(--dz-accent) 22%);
-}
-
-.reveal .slides section[data-dz-accent] .dz-pane[data-dz-pane-mode="text"] {
-  background: color-mix(in srgb, var(--dz-accent) 8%, rgba(30, 41, 59, 0.88));
-}
-
 .reveal .slides section[data-dz-theme-transition] {
   transition:
     background-color 220ms ease,
