@@ -6,6 +6,8 @@
   "files": [
     "dist",
     "src/compiler",
+    "demo/vendor/reveal",
+    "demo/src/assets/media",
     "README.md"
   ],
   "exports": {

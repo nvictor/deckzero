@@ -143,6 +143,31 @@ Use a shared card shell when the slide repeats the same conceptual unit several 
 
 ---
 
+## Lists in Cards
+
+Card shells also support nested lists with proper inset for markers.
+
+<div class="dz-card-grid" data-dz-columns="2">
+  <div class="dz-card">
+    <strong>Features</strong>
+    <ul>
+      <li>Layout primitives</li>
+      <li>Token themes</li>
+      <li>Auto layout</li>
+    </ul>
+  </div>
+  <div class="dz-card">
+    <strong>Benefits</strong>
+    <ol>
+      <li>Consistency</li>
+      <li>Speed</li>
+      <li>Maintainability</li>
+    </ol>
+  </div>
+</div>
+
+---
+
 ## Tone Modifiers
 
 Keep local meaning in the content while mapping visuals onto generic tones.

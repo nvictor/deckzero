@@ -221,6 +221,14 @@
   margin: 0;
 }
 
+.reveal :is(.dz-card, .dz-sequence-node) :is(ul, ol) {
+  padding-left: 1.25rem;
+}
+
+.reveal :is(.dz-card, .dz-sequence-node) li {
+  padding-left: 0.15em;
+}
+
 .reveal .dz-card strong,
 .reveal .dz-card h3,
 .reveal .dz-card h4,
