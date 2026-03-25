@@ -20,9 +20,8 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "sync-demo-assets": "node ./scripts/sync-demo-assets.mjs",
-    "build-demo": "node ./scripts/build-demo.mjs",
-    "compile": "npm run build-demo",
-    "test": "node ./tests/runtime/deckzero.test.mjs && node ./tests/compiler/markdown.test.mjs && node ./tests/compiler/build-demo.test.mjs"
+    "sync": "node ./scripts/sync.mjs",
+    "build": "node ./scripts/build.mjs",
+    "test": "node ./tests/runtime/deckzero.test.mjs && node ./tests/compiler/markdown.test.mjs && node ./tests/compiler/build.test.mjs"
   }
 }

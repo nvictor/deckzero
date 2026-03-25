@@ -54,7 +54,7 @@ Recommended workflow:
 
 1. Edit `demo/src/deck.md`.
 2. Preserve `deckzero` hints as HTML comments.
-3. Run `npm run build-demo`.
+3. Run `npm run build`.
 4. Open `demo/dist/index.html`.
 
 Use HTML comments inside a slide section:
@@ -342,10 +342,9 @@ The runtime auto-applies itself on `DOMContentLoaded`, and again on Reveal's `re
 
 ## Scripts
 
-- `npm run build-demo`: compile `demo/src/deck.md` into `demo/dist/index.html`, then sync runtime assets
-- `npm run compile`: alias for `npm run build-demo`
-- `npm run sync-demo-assets`: copy `dist/` into `demo/dist/assets/deckzero`
-- `npm test`: run runtime and compiler tests
+- \`npm run build\`: compile \`demo/src/deck.md\` into \`demo/dist/index.html\`, then sync runtime assets
+- \`npm run sync\`: copy \`dist/\` into \`demo/dist/assets/deckzero\`
+- \`npm test\`: run runtime and compiler tests
 
 ## Demo
 
@@ -353,7 +352,7 @@ The demo output includes vendored Reveal runtime assets plus local media, so use
 
 To rebuild the demo:
 
-- `npm run build-demo`
+- \`npm run build\`
 
 To load the demo:
 
