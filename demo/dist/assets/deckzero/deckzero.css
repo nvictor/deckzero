@@ -333,6 +333,9 @@
 }
 
 .reveal .slides section[data-dz-layout="code-focus"] pre {
+  max-width: min(100%, 74rem);
+  border-radius: var(--dz-radius);
+  overflow: hidden;
   background: transparent;
   box-shadow: none;
 }
@@ -340,7 +343,7 @@
 .reveal .slides section[data-dz-layout="code-focus"] pre code {
   display: block;
   padding: 1.4rem;
-  border-radius: var(--dz-radius);
+  border-radius: inherit;
   background: #111827;
 }
 
