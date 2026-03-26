@@ -78,16 +78,34 @@ The same primitive supports a vertical orientation and accent mode.
 
 ---
 
-## Code Focus
+<!-- section: data-auto-animate -->
+<!-- layout: code-focus -->
+<h2 data-id="code-title">Code Focus</h2>
 
-```html
+<pre data-id="code-animation"><code class="language-html" data-trim><script type="text/template">
+<section>
+  <!-- layout: split:text-image -->
+  <h2>How It Works</h2>
+  <div>Text content</div>
+</section>
+</script></code></pre>
+
+The runtime infers code-focus when a slide is dominated by a code block.
+
+---
+
+<!-- section: data-auto-animate -->
+<!-- layout: code-focus -->
+<h2 data-id="code-title">Code Focus</h2>
+
+<pre data-id="code-animation"><code class="language-html" data-trim><script type="text/template">
 <section>
   <!-- layout: split:text-image -->
   <h2>How It Works</h2>
   <div>Text content</div>
   <div><img src="assets/media/default.svg" /></div>
 </section>
-```
+</script></code></pre>
 
 The runtime infers code-focus when a slide is dominated by a code block.
 

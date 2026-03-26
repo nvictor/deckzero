@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { compileMarkdownDeck, formatHtml } from "../../src/compiler/index.mjs";
 
 const sampleMarkdown = `
+<!-- section: data-auto-animate -->
 <!-- layout: split:text-image -->
 # Sample
 
@@ -26,7 +27,7 @@ Paragraph with \`inline\` code.
 
 const compiled = compileMarkdownDeck(sampleMarkdown);
 
-assert.match(compiled, /<section>\s*<!-- layout: split:text-image -->/);
+assert.match(compiled, /<section data-auto-animate>\s*<!-- layout: split:text-image -->/);
 assert.match(compiled, /<h1>Sample<\/h1>/);
 assert.match(compiled, /<p>Paragraph with <code>inline<\/code> code\.<\/p>/);
 assert.match(compiled, /<ul>\s*<li>One<\/li>\s*<li>Two<\/li>\s*<\/ul>/);

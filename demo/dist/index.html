@@ -111,143 +111,157 @@
         </div>
       </section>
 
-      <section>
-        <h2>Code Focus</h2>
-        <pre><code class="language-html" data-trim>
-        &lt;section&gt;
-        &lt;!-- layout: split:text-image --&gt;
-        &lt;h2&gt;How It Works&lt;/h2&gt;
-        &lt;div&gt;Text content&lt;/div&gt;
-        &lt;div&gt;&lt;img src="assets/media/default.svg" /&gt;&lt;/div&gt;
-        &lt;/section&gt;
-      </code></pre>
+      <section data-auto-animate>
+        <!-- layout: code-focus -->
+        <h2 data-id="code-title">Code Focus</h2>
+        <pre data-id="code-animation"><code class="language-html" data-trim><script type="text/template">
+        <section>
+          <!-- layout: split:text-image -->
+          <h2>How It Works</h2>
+          <div>Text content</div>
+        </section>
+      </script></code></pre>
       <p>The runtime infers code-focus when a slide is dominated by a code block.</p>
     </section>
 
-    <section>
-      <img src="assets/media/default.svg" alt="Hero image placeholder" />
-      <p class="dz-caption">Image with a short caption falls into the image-caption primitive.</p>
-    </section>
+    <section data-auto-animate>
+      <!-- layout: code-focus -->
+      <h2 data-id="code-title">Code Focus</h2>
+      <pre data-id="code-animation"><code class="language-html" data-trim><script type="text/template">
+      <section>
+        <!-- layout: split:text-image -->
+        <h2>How It Works</h2>
+        <div>Text content</div>
+        <div><img src="assets/media/default.svg" /></div>
+      </section>
+    </script></code></pre>
+    <p>The runtime infers code-focus when a slide is dominated by a code block.</p>
+  </section>
 
-    <section>
-      <!-- layout: step -->
-      <h2>Step Slide</h2>
-      <p class="fragment">Start from the base system.</p>
-      <p class="fragment">Add a small set of layouts.</p>
-      <p class="fragment">Let theme files override tokens only.</p>
-    </section>
+  <section>
+    <img src="assets/media/default.svg" alt="Hero image placeholder" />
+    <p class="dz-caption">Image with a short caption falls into the image-caption primitive.</p>
+  </section>
 
-    <section>
-      <h2>Auto Layout Heuristic</h2>
-      <div>
-        <h3>Signal</h3>
-        <p>Two major content blocks.</p>
-      </div>
-      <div>
-        <h3>Default</h3>
-        <p>`split:text-text` with shared spacing and card treatment.</p>
-      </div>
-    </section>
+  <section>
+    <!-- layout: step -->
+    <h2>Step Slide</h2>
+    <p class="fragment">Start from the base system.</p>
+    <p class="fragment">Add a small set of layouts.</p>
+    <p class="fragment">Let theme files override tokens only.</p>
+  </section>
 
-    <section>
-      <h2>Card Collection</h2>
-      <p>Use a shared card shell when the slide repeats the same conceptual unit several times.</p>
-      <div class="dz-card-grid" data-dz-columns="3">
-        <div class="dz-card fragment" data-fragment-index="1">
-          <strong>Shared shell</strong>
-          <small>Border, spacing, and surface come from deckzero instead of deck-local CSS.</small>
-        </div>
-        <div class="dz-card fragment" data-fragment-index="2">
-          <strong>Responsive grid</strong>
-          <small>Two-column, three-column, and auto-fit collections can all use the same primitive.</small>
-        </div>
-        <div class="dz-card fragment" data-fragment-index="3">
-          <strong>Lower migration cost</strong>
-          <small>Downstream decks only keep token overrides and truly unique visual exceptions.</small>
-        </div>
-      </div>
-    </section>
+  <section>
+    <h2>Auto Layout Heuristic</h2>
+    <div>
+      <h3>Signal</h3>
+      <p>Two major content blocks.</p>
+    </div>
+    <div>
+      <h3>Default</h3>
+      <p>`split:text-text` with shared spacing and card treatment.</p>
+    </div>
+  </section>
 
-    <section>
-      <h2>Lists in Cards</h2>
-      <p>Card shells also support nested lists with proper inset for markers.</p>
-      <div class="dz-card-grid" data-dz-columns="2">
-        <div class="dz-card">
-          <strong>Features</strong>
-          <ul>
-            <li>Layout primitives</li>
-            <li>Token themes</li>
-            <li>Auto layout</li>
-          </ul>
-        </div>
-        <div class="dz-card">
-          <strong>Benefits</strong>
-          <ol>
-            <li>Consistency</li>
-            <li>Speed</li>
-            <li>Maintainability</li>
-          </ol>
-        </div>
+  <section>
+    <h2>Card Collection</h2>
+    <p>Use a shared card shell when the slide repeats the same conceptual unit several times.</p>
+    <div class="dz-card-grid" data-dz-columns="3">
+      <div class="dz-card fragment" data-fragment-index="1">
+        <strong>Shared shell</strong>
+        <small>Border, spacing, and surface come from deckzero instead of deck-local CSS.</small>
       </div>
-    </section>
+      <div class="dz-card fragment" data-fragment-index="2">
+        <strong>Responsive grid</strong>
+        <small>Two-column, three-column, and auto-fit collections can all use the same primitive.</small>
+      </div>
+      <div class="dz-card fragment" data-fragment-index="3">
+        <strong>Lower migration cost</strong>
+        <small>Downstream decks only keep token overrides and truly unique visual exceptions.</small>
+      </div>
+    </div>
+  </section>
 
-    <section>
-      <h2>Tone Modifiers</h2>
-      <p>Keep local meaning in the content while mapping visuals onto generic tones.</p>
-      <div class="dz-card-grid" data-dz-columns="3">
-        <div class="dz-card dz-tone-success fragment" data-fragment-index="1">
-          <strong>Success</strong>
-          <small>Useful for healthy states, ready paths, or low-risk conditions.</small>
-        </div>
-        <div class="dz-card dz-tone-warning fragment" data-fragment-index="2">
-          <strong>Warning</strong>
-          <small>Useful for investigate states, watch items, or medium-severity decisions.</small>
-        </div>
-        <div class="dz-card dz-tone-danger fragment" data-fragment-index="3">
-          <strong>Danger</strong>
-          <small>Useful for page-now states, critical paths, or high-risk conditions.</small>
-        </div>
+  <section>
+    <h2>Lists in Cards</h2>
+    <p>Card shells also support nested lists with proper inset for markers.</p>
+    <div class="dz-card-grid" data-dz-columns="2">
+      <div class="dz-card">
+        <strong>Features</strong>
+        <ul>
+          <li>Layout primitives</li>
+          <li>Token themes</li>
+          <li>Auto layout</li>
+        </ul>
       </div>
-    </section>
+      <div class="dz-card">
+        <strong>Benefits</strong>
+        <ol>
+          <li>Consistency</li>
+          <li>Speed</li>
+          <li>Maintainability</li>
+        </ol>
+      </div>
+    </div>
+  </section>
 
-    <section>
-      <h2>Sequence Primitive</h2>
-      <p>Use sequence nodes for journeys, reasoning chains, and staged rollouts.</p>
-      <div class="dz-sequence" data-dz-columns="4">
-        <article class="dz-sequence-node fragment" data-fragment-index="1">
-        <span class="dz-step-badge">1</span>
-        <strong>Observe</strong>
-        <small>Start from the visible signal.</small>
-        </article>
-        <article class="dz-sequence-node fragment" data-fragment-index="2">
-        <span class="dz-step-badge">2</span>
-        <strong>Correlate</strong>
-        <small>Line up logs, metrics, and deploy context.</small>
-        </article>
-        <article class="dz-sequence-node fragment dz-tone-warning" data-fragment-index="3">
-        <span class="dz-step-badge">3</span>
-        <strong>Decide</strong>
-        <small>Pick the next investigation branch or remediation step.</small>
-        </article>
-        <article class="dz-sequence-node fragment dz-tone-success" data-fragment-index="4">
-        <span class="dz-step-badge">4</span>
-        <strong>Resolve</strong>
-        <small>Publish the outcome and fold the learning back into the system.</small>
-        </article>
+  <section>
+    <h2>Tone Modifiers</h2>
+    <p>Keep local meaning in the content while mapping visuals onto generic tones.</p>
+    <div class="dz-card-grid" data-dz-columns="3">
+      <div class="dz-card dz-tone-success fragment" data-fragment-index="1">
+        <strong>Success</strong>
+        <small>Useful for healthy states, ready paths, or low-risk conditions.</small>
       </div>
-    </section>
+      <div class="dz-card dz-tone-warning fragment" data-fragment-index="2">
+        <strong>Warning</strong>
+        <small>Useful for investigate states, watch items, or medium-severity decisions.</small>
+      </div>
+      <div class="dz-card dz-tone-danger fragment" data-fragment-index="3">
+        <strong>Danger</strong>
+        <small>Useful for page-now states, critical paths, or high-risk conditions.</small>
+      </div>
+    </div>
+  </section>
 
-    <section>
-      <!-- accent: info -->
-      <h2>Theme Overrides</h2>
-      <p>Switch the deck between dark, light, and hulk without changing any layout classes.</p>
-      <div class="theme-toggle">
-        <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'dark')">Dark</button>
-        <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'light')">Light</button>
-        <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'hulk')">Hulk</button>
-      </div>
-    </section>
-  </div>
+  <section>
+    <h2>Sequence Primitive</h2>
+    <p>Use sequence nodes for journeys, reasoning chains, and staged rollouts.</p>
+    <div class="dz-sequence" data-dz-columns="4">
+      <article class="dz-sequence-node fragment" data-fragment-index="1">
+      <span class="dz-step-badge">1</span>
+      <strong>Observe</strong>
+      <small>Start from the visible signal.</small>
+      </article>
+      <article class="dz-sequence-node fragment" data-fragment-index="2">
+      <span class="dz-step-badge">2</span>
+      <strong>Correlate</strong>
+      <small>Line up logs, metrics, and deploy context.</small>
+      </article>
+      <article class="dz-sequence-node fragment dz-tone-warning" data-fragment-index="3">
+      <span class="dz-step-badge">3</span>
+      <strong>Decide</strong>
+      <small>Pick the next investigation branch or remediation step.</small>
+      </article>
+      <article class="dz-sequence-node fragment dz-tone-success" data-fragment-index="4">
+      <span class="dz-step-badge">4</span>
+      <strong>Resolve</strong>
+      <small>Publish the outcome and fold the learning back into the system.</small>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <!-- accent: info -->
+    <h2>Theme Overrides</h2>
+    <p>Switch the deck between dark, light, and hulk without changing any layout classes.</p>
+    <div class="theme-toggle">
+      <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'dark')">Dark</button>
+      <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'light')">Light</button>
+      <button type="button" onclick="document.querySelector('.reveal').setAttribute('data-dz-theme', 'hulk')">Hulk</button>
+    </div>
+  </section>
+</div>
 </div>
 <script src="assets/reveal/reveal.js"></script>
 <script src="assets/reveal/plugin/zoom.js"></script>

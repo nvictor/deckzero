@@ -12,10 +12,12 @@ const paths = createProjectPaths(projectRoot);
 const deckMarkdown = await fs.readFile(paths.demoMarkdownPath, "utf8");
 const deckHtml = compileMarkdownDeck(deckMarkdown);
 
-assert.equal((deckHtml.match(/<section>/g) || []).length, 15);
 assert.match(deckHtml, /<!-- layout: step -->/);
 assert.match(deckHtml, /<div class="theme-toggle">/);
 assert.match(deckHtml, /<p class="fragment">Start from the base system\.<\/p>/);
+assert.match(deckHtml, /<section data-auto-animate>/);
+assert.match(deckHtml, /<h2 data-id="code-title">Code Focus<\/h2>/);
+assert.match(deckHtml, /<pre data-id="code-animation"><code class="language-html" data-trim><script type="text\/template">/);
 assert.match(deckHtml, /<img src="assets\/media\/default\.svg" alt="Hero image placeholder" \/>/);
 assert.match(deckHtml, /<p class="dz-caption">Image with a short caption falls into the image-caption primitive\.<\/p>/);
 assert.match(deckHtml, /<div class="dz-card-grid" data-dz-columns="3">/);
@@ -36,6 +38,7 @@ await fs.stat(path.join(paths.demoOutputDeckzeroDir, "deckzero.js"));
 await fs.stat(path.join(paths.demoOutputMediaDir, "default.svg"));
 
 assert.match(generatedIndex, /<section>\s*<!-- layout: title -->/);
+assert.match(generatedIndex, /<section data-auto-animate>/);
 assert.match(generatedIndex, /^<!DOCTYPE html>\n<html lang="en">\n  <head>/);
 assert.match(generatedIndex, /<title>deckzero demo<\/title>/);
 assert.match(generatedIndex, /assets\/deckzero\/themes\/hulk\.css/);

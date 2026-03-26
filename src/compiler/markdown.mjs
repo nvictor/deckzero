@@ -171,6 +171,11 @@ function collectComment(lines, startIndex) {
   };
 }
 
+function extractSectionAttribute(commentHtml) {
+  var match = String(commentHtml).trim().match(/^<!--\s*section:\s*([\s\S]*?)\s*-->$/);
+  return match ? match[1].trim() : "";
+}
+
 function collectFence(lines, startIndex) {
   var info = lines[startIndex].replace(/^\s*```/, "").trim();
   var chunk = [];
@@ -288,6 +293,7 @@ function splitSlides(markdown) {
 function compileSlide(markdown) {
   var lines = String(markdown).replace(/\r\n/g, "\n").split("\n");
   var parts = [];
+  var sectionAttributes = [];
   var index = 0;
 
   while (index < lines.length) {
@@ -300,7 +306,12 @@ function compileSlide(markdown) {
 
     if (isCommentStart(line)) {
       var comment = collectComment(lines, index);
-      parts.push(comment.html);
+      var sectionAttribute = extractSectionAttribute(comment.html);
+      if (sectionAttribute) {
+        sectionAttributes.push(sectionAttribute);
+      } else {
+        parts.push(comment.html);
+      }
       index = comment.nextIndex;
       continue;
     }
@@ -337,7 +348,8 @@ function compileSlide(markdown) {
     index = paragraph.nextIndex;
   }
 
-  return "<section>\n" + parts.join("\n") + "\n</section>";
+  var openingTag = sectionAttributes.length > 0 ? "<section " + sectionAttributes.join(" ") + ">" : "<section>";
+  return openingTag + "\n" + parts.join("\n") + "\n</section>";
 }
 
 export function compileMarkdownDeck(markdown) {
